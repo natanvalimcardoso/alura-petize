@@ -1,9 +1,15 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:petize_alura/src/bytebank/model/transferencia.dart';
+
+import '../components/text_field_component.dart';
 
 class FormularioTransferencias extends StatelessWidget {
-  const FormularioTransferencias({Key? key}) : super(key: key);
+  FormularioTransferencias({Key? key}) : super(key: key);
+
+  final TextEditingController _controladorCampoNumeroConta =TextEditingController();
+  final TextEditingController _controladorCampoValor = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -13,39 +19,38 @@ class FormularioTransferencias extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: TextField(
-              style: TextStyle(
-                fontSize: 24,
-              ),
-              decoration: InputDecoration(
-                labelText: 'Numero da conta',
-                hintText: '0000',
-              ),
-              keyboardType: TextInputType.number,
-            ),
+          TextFieldComponent(
+            controlador: _controladorCampoNumeroConta,
+            dica: '0000',
+            rotulo: 'Numero da conta',
           ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: TextField(
-              style: TextStyle(
-                fontSize: 24,
-              ),
-              decoration: InputDecoration(
-                icon: Icon(Icons.monetization_on),
-                labelText: 'Valor',
-                hintText: '0.00',
-              ),
-              keyboardType: TextInputType.number,
-            ),
+          TextFieldComponent(
+            controlador: _controladorCampoValor,
+            dica: '0.00',
+            rotulo: 'Valor',
+            icone: Icons.monetization_on,
           ),
+          //* Botão de transferência
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              _criaTransferencia(context);
+            },
             child: Text('Confirmar'),
           )
         ],
       ),
     );
+  }
+
+  void _criaTransferencia(BuildContext context) {
+    final int numeroConta =
+        int.parse(_controladorCampoNumeroConta.text);
+    final double valor = double.parse(_controladorCampoValor.text);
+    
+    if (numeroConta != null && valor != null) {
+      final transferencia =Transferencia(valor: valor, numeroConta: numeroConta);
+      debugPrint('$transferencia');
+      Navigator.pop(context, transferencia);
+    }
   }
 }
