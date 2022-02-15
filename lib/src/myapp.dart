@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'bytebank/screens/transferencia/formulario_transferencia.dart';
 import 'bytebank/screens/transferencia/lista_transferencia.dart';
 
 class MyApp extends StatelessWidget {
@@ -20,10 +21,10 @@ class MyApp extends StatelessWidget {
             textTheme: ButtonTextTheme.primary,
           ),
         ),
-        // DarkMode
         initialRoute: '/',
         routes: {
           '/': (context) => const ListaTransferencia(),
+          '/formularioTransferencias': (context) => const FormularioTransferencias(),
         });
   }
 }
