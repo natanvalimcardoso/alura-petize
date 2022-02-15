@@ -5,7 +5,7 @@ import '../model/transferencia.dart';
 class ItemTransferencia extends StatelessWidget {
   final Transferencia _transferencia;
 
-  const ItemTransferencia(this._transferencia) : super();
+   const ItemTransferencia(this._transferencia, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class ItemTransferencia extends StatelessWidget {
       child: ListTile(
         leading: Icon(Icons.monetization_on),
         title: Text('R\$ ${_transferencia.valor.toString()}'),
-        subtitle: Text('${_transferencia.numeroConta.toString()}'),
+        subtitle: Text(_transferencia.numeroConta.toString()),
       ),
     );
   }

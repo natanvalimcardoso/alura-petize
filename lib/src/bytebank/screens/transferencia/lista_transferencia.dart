@@ -3,20 +3,22 @@
 import 'package:flutter/material.dart';
 import 'package:petize_alura/src/bytebank/components/card_item_transferencia.dart';
 import 'package:petize_alura/src/bytebank/model/transferencia.dart';
-import 'package:petize_alura/src/bytebank/pages/formulario_transferencia.dart';
 
-class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
+import 'formulario_transferencia.dart';
+
+class ListaTransferencia extends StatefulWidget {
+  const ListaTransferencia({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<ListaTransferencia> createState() => _ListaTransferenciaState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _ListaTransferenciaState extends State<ListaTransferencia> {
   final List<Transferencia> _transferencias = [];
 
   @override
   Widget build(BuildContext context) {
+    setState(() {});
 //   _transferencias.add(Transferencia(valor: 100, numeroConta: 12222)); //Testar se está adicionando
     return Scaffold(
       appBar: AppBar(
@@ -31,15 +33,15 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () {
-          final Future<Transferencia?> future = Navigator.push(
-            context,
+          Navigator.push(context,
             MaterialPageRoute(
               builder: (context) => FormularioTransferencias(),
             ),
-          );
-          future.then(
+          ).then(
             (transferenciaRecebida) {
-              _transferencias.add(transferenciaRecebida!);
+              setState(() {
+                _transferencias.add(transferenciaRecebida!);
+              });
             },
           );
         },

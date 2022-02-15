@@ -6,7 +6,7 @@ class TextFieldComponent extends StatelessWidget {
   final String dica;
   final IconData? icone;
 
-  TextFieldComponent({
+  const TextFieldComponent({
     Key? key,
     required this.controlador,
     required this.rotulo,
@@ -20,7 +20,7 @@ class TextFieldComponent extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: TextField(
         controller: controlador,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 24,
         ),
         decoration: InputDecoration(
